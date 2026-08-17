@@ -1,1 +1,1 @@
-Learning GIT is useful
+Today we are learning git commands like git clone , git pull , git push etc 
