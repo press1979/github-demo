@@ -1,2 +1,3 @@
 GIT tool is used by most of the enterprise
 GIT is free to use
+GIT is easy to learn
