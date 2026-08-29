@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         // Change this path to any folder on your computer representing the "Live Server"
-        DEPLOY_PATH = 'C:/live-website' 
+        DEPLOY_PATH = '/home/ubuntu/github-test' 
     }
     stages {
         stage('1. Checkout Code') {
