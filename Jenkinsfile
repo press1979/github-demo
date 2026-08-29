@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        // Change this path to any folder on your computer representing the "Live Server"
+        // A standard folder on Linux that Jenkins always has permission to use
         DEPLOY_PATH = '/home/ubuntu/github-test' 
     }
     stages {
@@ -14,7 +14,6 @@ pipeline {
         stage('2. Continuous Integration (Test)') {
             steps {
                 echo 'Running Quality Checks...'
-                // Simple CI Test: Check if the index.html file actually exists
                 script {
                     if (fileExists('index.html')) {
                         echo 'SUCCESS: index.html found. Code structure is valid.'
@@ -27,10 +26,14 @@ pipeline {
         stage('3. Continuous Deployment (Deploy)') {
             steps {
                 echo "Shipping code to the Live Server..."
-                // Copies the fresh file into your simulated deployment web folder
-                // Use 'cp' instead of 'copy' if you are running Jenkins on Linux/Mac
-                bat "copy index.html \"${DEPLOY_PATH}\" /Y" 
-                echo "Deployment Complete! Open your folder to see the updated site."
+                
+                // 1. Automatically create the folder if it doesn't exist yet
+                sh "mkdir -p ${DEPLOY_PATH}"
+                
+                // 2. LINUX FIX: Use 'sh' and 'cp' to copy the website file
+                sh "cp index.html ${DEPLOY_PATH}/"
+                
+                echo "Deployment Complete! File copied to ${DEPLOY_PATH}/index.html"
             }
         }
     }
