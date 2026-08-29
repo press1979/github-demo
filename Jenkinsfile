@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         // A standard folder on Linux that Jenkins always has permission to use
-        DEPLOY_PATH = '/home/ubuntu/github-test' 
+        DEPLOY_PATH = '/tmp/github-test' 
     }
     stages {
         stage('1. Checkout Code') {
